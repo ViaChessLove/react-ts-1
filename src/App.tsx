@@ -1,25 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { StyledH1 } from './components/H1/H1.style';
+import { GlobalStyle } from './Global.style';
+import PostCard, { Post } from './components/PostCard/PostCard';
 
-function App() {
+const App = () => {
+  let post1: Post = {
+    id: 1,
+    title: 'Hello',
+    content: 'qwerty',
+    image: <img src="https://picsum.photos/id/237/200/300" alt="" />,
+  }
+  let post2: Post = {
+    id: 2,
+    title: 'Hello2',
+    content: 'qwerty2',
+    image: <img src="https://picsum.photos/id/233/200/300" alt="" />,
+  }
+  let postList: Post[] = [];
+  postList.push(post1, post2);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle/>
+      <StyledH1>  
+        Hello world!
+      </StyledH1>
+      <div style={{display: 'flex', flexWrap: 'wrap'}}>
+        {postList.map((post: Post) => {
+          return post.id%2 ===0?  <PostCard post={post}/>:<PostCard post={post} style={{marginRight:'10px'}}/>
+        })}
+      </div>
+    </>
   );
 }
 
